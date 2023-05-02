@@ -12,8 +12,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class EditarComponent implements OnInit,OnDestroy{  
   
   atividades : Atividade[] = [];
-  inserir: any = { "descricao": ""}
-
+  //inserir: any = { "descricao": ""}
+  myDate = new Date();
+  inserir: Atividade[] = [
+    {
+    id: 0,
+    descricao: '',
+    concluido: false,
+    createdAt: this.myDate,
+    updatedAt: this.myDate},
+  ];
   constructor(private Routes: ActivatedRoute,
     private ListarNaoConcluidaService: ListarNaoConcluidaService,
     private router: Router){}
@@ -21,17 +29,17 @@ export class EditarComponent implements OnInit,OnDestroy{
   ngOnInit() {
     this.Routes.params.subscribe(
       (params: any) => {        
-        this.inserir.descricao = params['descricao'];
-        this.inserir.id = params['id'];
+        this.inserir[0].descricao = params['descricao'];
+        this.inserir[0].id = params['id'];
       }      
     );  
   }
 
   onSubmit(inserir: Atividade[]){              
-    if(this.inserir.descricao){   
-      this.ListarNaoConcluidaService.registrar(this.inserir).subscribe((atividades: Atividade[]) => {
+    if(this.inserir[0].descricao){   
+      this.ListarNaoConcluidaService.registrar(this.inserir[0]).subscribe((atividades: Atividade[]) => {
       this.atividades = atividades;
-      this.inserir = { "descricao": ""};      
+      this.inserir[0].descricao = '';   
       });       
     }else {
       console.log('insira algo ai');
@@ -39,8 +47,8 @@ export class EditarComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy(): void {    
-    this.inserir.descricao = '';
-    this.inserir.id = ''; 
+    this.inserir[0].descricao = '';
+    this.inserir[0].id = 0; 
     setTimeout(() => {
         window.location.reload();
       }, 1000);  

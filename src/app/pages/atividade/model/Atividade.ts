@@ -4,7 +4,7 @@ import { Data } from "@angular/router"
 
 
 export interface Atividade {
-    id: number
+    id?: number
     descricao: string
     concluido: boolean
     createdAt: Data

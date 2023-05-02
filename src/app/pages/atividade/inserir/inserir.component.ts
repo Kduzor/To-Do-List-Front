@@ -10,24 +10,33 @@ import { Atividade } from '../model/Atividade';
 })
 export class InserirComponent implements OnInit {
 
-  inserir: any = { "descricao": ""}
   lista: Atividade[]=[];
-
+  myDate = new Date();
+  inserir: Atividade[] = [
+    {
+    descricao: '',
+    concluido: false,
+    createdAt: this.myDate,
+    updatedAt: this.myDate},
+  ];
   constructor(private InserirService: InserirService,private Router: Router){}
 
   ngOnInit(): void {
-    // this.onsubmit();
+    console.log(this.inserir[0].id);
   }
 
   onSubmit(){               
-    if(this.inserir.descricao){      
-      this.InserirService.registrar(this.inserir).subscribe((lista: Atividade[]) => {
+    if(this.inserir[0].descricao){      
+      this.InserirService.registrar(this.inserir[0]).subscribe((lista: Atividade[]) => {
       this.lista = lista;
-      this.inserir = { "descricao": ""};
+      this.inserir[0].descricao = '';
       });   
       this.Router.navigate(['/listarnaoconcluida']);
     }else {
       console.log('mensagem bloquear form vazio');
     }  
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000); 
   }
 }

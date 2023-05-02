@@ -7,7 +7,7 @@
             <div class="form-group">
               <label for="nome">Atividade</label>
               <input type="text" class="form-control" name="descricao"
-              id="nome" placeholder="Inserir Atividade" [(ngModel)]="inserir.descricao" > 
+              id="nome" placeholder="Inserir Atividade" [(ngModel)]="this.inserir[0].descricao" > 
             </div>
             <button routerLink="/listarnaoconcluida" type="submit" class="btn btn-primary" (click)="onSubmit(inserir)">Submit</button>
           </form>

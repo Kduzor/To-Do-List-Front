@@ -14,8 +14,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class ListarNaoConcluidaComponent implements OnInit{
  
   protected atividades$: Observable<Atividade[]> | undefined;
-  inserir: any = { "descricao": ""}
-
+  
   constructor(private ListarNaoConcluidaService: ListarNaoConcluidaService){}
   ngOnInit() {   
     this.listar()   

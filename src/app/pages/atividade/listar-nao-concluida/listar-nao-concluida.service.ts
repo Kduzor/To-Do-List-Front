@@ -17,16 +17,17 @@ export class ListarNaoConcluidaService {
     return this.http.get<Atividade[]>(link);
   }
 
-  concluir(id: number , status:boolean){   
+  concluir(id:  number | undefined , status:boolean){   
     const link = 'http://localhost:3000/inserir/concluir/'+String(id)+'/'+String(status);        
     return this.http.get<Atividade[]>(link);
   }
 
-  excluir(id: number , status:boolean){   
+  excluir(id: number | undefined , status:boolean){   
     const link = 'http://localhost:3000/deletaatividade/'+String(id)+'/'+String(status);        
     return this.http.get<Atividade[]>(link);
   }
-  registrar(descricao: String){       
+  registrar(descricao: any){       
+    console.log(descricao);
     const link = 'http://localhost:3000/inserir/register';           
     return this.http.post<Atividade[]>(link,descricao);    
   }

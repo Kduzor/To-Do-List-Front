@@ -11,7 +11,7 @@ export class InserirService {
 
   constructor(private http: HttpClient) {  }
    
- public registrar(descricao: String){       
+ public registrar(descricao: any){       
     const link = 'http://localhost:3000/inserir/register';           
     return this.http.post<Atividade[]>(link,descricao);    
   }

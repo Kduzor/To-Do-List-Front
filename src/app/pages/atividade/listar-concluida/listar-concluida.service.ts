@@ -17,7 +17,7 @@ export class ListarConcluidaService
     return this.http.get<Atividade[]>(link);
   }
 
-  concluir(id: number , status:boolean){   
+  concluir(id: Number | undefined , status:boolean){   
     const link = 'http://localhost:3000/inserir/concluir/'+String(id)+'/'+String(status);        
     return this.http.get<Atividade[]>(link);
   }
