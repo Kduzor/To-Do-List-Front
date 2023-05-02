@@ -1,4 +1,4 @@
-import { InserirService } from './../../inserir/inserir.service';
+import { InserirService } from '../../inserir/inserir.service';
 import { Atividade } from '../../model/Atividade';
 import { ListarNaoConcluidaService } from '../listar-nao-concluida.service';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
