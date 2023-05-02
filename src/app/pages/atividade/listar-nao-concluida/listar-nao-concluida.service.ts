@@ -26,12 +26,7 @@ export class ListarNaoConcluidaService {
     const link = 'http://localhost:3000/deletaatividade/'+String(id)+'/'+String(status);        
     return this.http.get<Atividade[]>(link);
   }
-  registrar(descricao: any){       
-    console.log(descricao);
-    const link = 'http://localhost:3000/inserir/register';           
-    return this.http.post<Atividade[]>(link,descricao);    
-  }
-  
+
 }
 
 

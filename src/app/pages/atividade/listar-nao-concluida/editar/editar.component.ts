@@ -1,3 +1,4 @@
+import { InserirService } from './../../inserir/inserir.service';
 import { Atividade } from '../../model/Atividade';
 import { ListarNaoConcluidaService } from '../listar-nao-concluida.service';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
@@ -23,7 +24,7 @@ export class EditarComponent implements OnInit,OnDestroy{
     updatedAt: this.myDate},
   ];
   constructor(private Routes: ActivatedRoute,
-    private ListarNaoConcluidaService: ListarNaoConcluidaService,
+    private InserirService: InserirService,
     private router: Router){}
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class EditarComponent implements OnInit,OnDestroy{
 
   onSubmit(inserir: Atividade[]){              
     if(this.inserir[0].descricao){   
-      this.ListarNaoConcluidaService.registrar(this.inserir[0]).subscribe((atividades: Atividade[]) => {
+      this.InserirService.registrar(this.inserir[0]).subscribe((atividades: Atividade[]) => {
       this.atividades = atividades;
       this.inserir[0].descricao = '';   
       });       
