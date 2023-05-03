@@ -1,8 +1,7 @@
+import { AtividadeService } from './../../../shared/servicos/atividade.service';
 import { Observable } from 'rxjs';
-import { ListarNaoConcluidaService } from '../listar-nao-concluida/listar-nao-concluida.service';
-import { ListarConcluidaService } from './listar-concluida.service';
 import { Component, OnInit } from '@angular/core';
-import { Atividade } from '../model/Atividade';
+import { Atividade } from '../../../shared/model/Atividade';
 
 @Component({
   selector: 'app-listar-concluida',
@@ -11,16 +10,18 @@ import { Atividade } from '../model/Atividade';
 })
 export class ListarConcluidaComponent implements OnInit {
 
-  constructor(private ListarConcluidaService:ListarConcluidaService){}
+  constructor(private AtividadeService:AtividadeService){}
   atividades$: Observable<Atividade[]> | undefined;
-  ngOnInit() {
+  ngOnInit(): void {
     this.listar();
   }
 
-  listar(){
-    this.atividades$ = this.ListarConcluidaService.list();
+  //lista atividade concluida
+  private listar():void {
+    this.atividades$ = this.AtividadeService.listarAtividade(true);
   }
-  refazer(atividade: Atividade){     
-    this.atividades$ = this.ListarConcluidaService.concluir(atividade.id, atividade.concluido);    
+  //muda estado da atividade para não concluida  concluido = false
+  public refazer(atividade: Atividade):void {     
+    this.atividades$ = this.AtividadeService.atualizarAtividade(atividade.id, atividade.concluido);    
   }
 }

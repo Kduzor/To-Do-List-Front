@@ -1,6 +1,6 @@
 <app-atividade></app-atividade>
 
-<div class="class container">
+<div>
   <router-outlet></router-outlet>
 </div>
 
@@ -20,7 +20,7 @@
                <td> <a class="nav-link" [routerLink]="[atividade.id,atividade.descricao, 'editar']" >
                   {{ atividade.descricao.substr(0,47) }}</a> </td>
                   <td>                    
-                    <button  type="button" class="btn btn-primary" class="btn btn-success"(click)="concluir(atividade)">Concluir</button>  
+                    <button  type="button" class="btn btn-primary" class="btn btn-success"(click)="concluirAtividade(atividade)">Concluir</button>  
                     <button type="button" class="btn btn-danger"(click)="excluir(atividade)"> Excluir</button>                                        
                   </td>
               </tr>               

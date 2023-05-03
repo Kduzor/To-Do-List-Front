@@ -1,6 +1,5 @@
-import { InserirService } from '../../inserir/inserir.service';
-import { Atividade } from '../../model/Atividade';
-import { ListarNaoConcluidaService } from '../listar-nao-concluida.service';
+import { AtividadeService } from 'src/app/shared/servicos/atividade.service';
+import { Atividade } from '../../../../shared/model/Atividade';
 import { ActivatedRoute, Router, Routes } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
@@ -13,7 +12,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 export class EditarComponent implements OnInit,OnDestroy{  
   
   atividades : Atividade[] = [];
-  //inserir: any = { "descricao": ""}
   myDate = new Date();
   inserir: Atividade[] = [
     {
@@ -24,10 +22,10 @@ export class EditarComponent implements OnInit,OnDestroy{
     updatedAt: this.myDate},
   ];
   constructor(private Routes: ActivatedRoute,
-    private InserirService: InserirService,
+    private AtividadeService: AtividadeService,
     private router: Router){}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.Routes.params.subscribe(
       (params: any) => {        
         this.inserir[0].descricao = params['descricao'];
@@ -36,9 +34,9 @@ export class EditarComponent implements OnInit,OnDestroy{
     );  
   }
 
-  onSubmit(inserir: Atividade[]){              
+  public onSubmit(inserir: Atividade[]): void {              
     if(this.inserir[0].descricao){   
-      this.InserirService.registrar(this.inserir[0]).subscribe((atividades: Atividade[]) => {
+      this.AtividadeService.registrar(this.inserir[0].descricao,this.inserir[0].id).subscribe((atividades: Atividade[]) => {
       this.atividades = atividades;
       this.inserir[0].descricao = '';   
       });       
@@ -47,7 +45,7 @@ export class EditarComponent implements OnInit,OnDestroy{
     }       
   }
 
-  ngOnDestroy(): void {    
+  public ngOnDestroy(): void {    
     this.inserir[0].descricao = '';
     this.inserir[0].id = 0; 
     setTimeout(() => {

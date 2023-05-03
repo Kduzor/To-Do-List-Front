@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { InserirService } from './inserir.service';
-import { Atividade } from '../model/Atividade';
+import { Atividade } from '../../../shared/model/Atividade';
+import { AtividadeService } from 'src/app/shared/servicos/atividade.service';
 
 @Component({
   selector: 'app-inserir',
@@ -19,15 +19,16 @@ export class InserirComponent implements OnInit {
     createdAt: this.myDate,
     updatedAt: this.myDate},
   ];
-  constructor(private InserirService: InserirService,private Router: Router){}
+
+  constructor(private AtividadeService: AtividadeService,private Router: Router){}
 
   ngOnInit(): void {
     console.log(this.inserir[0].id);
   }
 
-  onSubmit(){               
+  public onSubmit():void {               
     if(this.inserir[0].descricao){      
-      this.InserirService.registrar(this.inserir[0]).subscribe((lista: Atividade[]) => {
+      this.AtividadeService.registrar(this.inserir[0].descricao).subscribe((lista: Atividade[]) => {
       this.lista = lista;
       this.inserir[0].descricao = '';
       });   
