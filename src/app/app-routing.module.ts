@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AtividadeComponent } from './layouts/atividade/atividade.component';
 
 
 const routes: Routes = [
-  {path: '', component: AtividadeComponent},  
+  {path: '',  loadChildren: () => import('./layouts/atividade/atividade.module').then((m) => m.AtividadeModule),},
 ];
 
 @NgModule({

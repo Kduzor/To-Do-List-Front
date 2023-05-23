@@ -1,7 +1,10 @@
 import { AtividadeService } from 'src/app/shared/servicos/atividade.service';
 import { Atividade } from '../../../../shared/model/Atividade';
-import { ActivatedRoute, Router, Routes } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { FormControl, Validators } from '@angular/forms';
+import { ListaNaoConcuidaService } from '../listar-nao-concluido.service';
 
 
 @Component({
@@ -9,48 +12,68 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   templateUrl: './editar.component.html',
   styleUrls: ['./editar.component.scss']
 })
-export class EditarComponent implements OnInit,OnDestroy{  
-  
-  atividades : Atividade[] = [];
-  myDate = new Date();
-  inserir: Atividade[] = [
-    {
-    id: 0,
-    descricao: '',
-    concluido: false,
-    createdAt: this.myDate,
-    updatedAt: this.myDate},
-  ];
-  constructor(private Routes: ActivatedRoute,
-    private AtividadeService: AtividadeService,
-    private router: Router){}
+export class EditarComponent implements OnInit {
+  public atividade!: Atividade;
+  public isAtividadeCarregada: boolean = false;
+
+  public descricaoForm = new FormControl<string>('', [Validators.required]);
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private atividadeService: AtividadeService,
+    private listaNaoConcuidaService: ListaNaoConcuidaService,
+  ) { }
 
   ngOnInit(): void {
-    this.Routes.params.subscribe(
-      (params: any) => {        
-        this.inserir[0].descricao = params['descricao'];
-        this.inserir[0].id = params['id'];
-      }      
-    );  
+
+    const atividade: Atividade | null = this.activatedRoute.snapshot.data['atividadeEditar'];
+    if (atividade === null) {
+      console.error('Não encontrei a atividade');
+      this.router.navigate(['../']);
+      return;
+    }
+
+    this.atividade = atividade;
+    this.descricaoForm.setValue(atividade.descricao);
+    this.isAtividadeCarregada = true;
+    // this.activatedRoute.params.subscribe(
+    //   (params: any) => {
+    //     const idAtividade = Number(params['id']);
+    //     this.carregaAtividadeEditar(idAtividade);
+    //   }
+    // );
   }
 
-  public onSubmit(inserir: Atividade[]): void {              
-    if(this.inserir[0].descricao){   
-      this.AtividadeService.registrar(this.inserir[0].descricao,this.inserir[0].id).subscribe((atividades: Atividade[]) => {
-      this.atividades = atividades;
-      this.inserir[0].descricao = '';   
-      });       
-    }else {
-      console.log('insira algo ai');
-    }       
-  }
+  // private async carregaAtividadeEditar(pIdAtividade: number): Promise<void> {
+  //   try {
+  //     const response = await lastValueFrom(this.atividadeService.listarAtividade(false));
+  //     const atividade = response.find(pAtividade => pAtividade.id === pIdAtividade);
 
-  public ngOnDestroy(): void {    
-    this.inserir[0].descricao = '';
-    this.inserir[0].id = 0; 
-    setTimeout(() => {
-        window.location.reload();
-      }, 1000);  
-  }
+  //     if (atividade === undefined) {
+  //       throw new Error('Atividade não encontrada');
+  //     }
 
+  //     this.atividade = atividade;
+  //     this.descricaoForm.setValue(atividade.descricao);
+  //     this.isAtividadeCarregada = true;
+  //   } catch (error) {
+  //     console.error(error);
+  //     this.router.navigate(['../']);
+  //   }
+  // }
+
+  public async onSubmit(): Promise<void> {
+    try {
+      if (this.descricaoForm.valid === false || this.descricaoForm.value === null) {
+        return;
+      }
+
+      await lastValueFrom(this.atividadeService.registrar(this.descricaoForm.value, this.atividade.id));
+      this.listaNaoConcuidaService.recarregarTelaEvent.emit();
+      this.router.navigate(['../listarnaoconcluida']);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

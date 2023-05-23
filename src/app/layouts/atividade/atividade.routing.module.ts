@@ -1,15 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { InserirComponent } from 'src/app/pages/atividade/inserir/inserir.component';
-import { ListarConcluidaComponent } from 'src/app/pages/atividade/listar-concluida/listar-concluida.component';
-import { EditarComponent } from 'src/app/pages/atividade/listar-nao-concluida/editar/editar.component';
-import { ListarNaoConcluidaComponent } from 'src/app/pages/atividade/listar-nao-concluida/listar-nao-concluida.component';
+import { AtividadeComponent } from './atividade.component';
 
 const atividaderoutes: Routes = [
-  {path: 'listarnaoconcluida', component: ListarNaoConcluidaComponent, children:[  {path: ':id/:descricao/editar', component: EditarComponent},]},
-  {path: 'listarconcluida', component: ListarConcluidaComponent},
-  {path: 'inserir', component: InserirComponent},
+  {
+    path: '',
+    component: AtividadeComponent ,
+    children: [
+      {
+        path: 'listarconcluida',
+        loadChildren: () => import('../../pages/atividade/listar-concluida/listar-concluida.module').then((m) => m.ListaConcluidaModule),
+      },
+      {
+        path: 'listarnaoconcluida',
+        loadChildren: () => import('../../pages/atividade/listar-nao-concluida/listar-nao-concluida.module').then((m) => m.ListaNaoConcluidaModule),
+      },
+      {
+        path: 'inserir',
+        loadChildren: () => import('../../pages/atividade/inserir/inserir.module').then((m) => m.InserirModule),
+      },
+    ]
+  },
 ];
 @NgModule({
   imports: [RouterModule.forChild(atividaderoutes)],

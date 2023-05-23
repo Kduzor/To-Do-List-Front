@@ -1,32 +1,27 @@
-<app-atividade></app-atividade>
-
-<div>
-  <router-outlet></router-outlet>
-</div>
-
-<div class="container">
-    <div class="row">
-      <div class="col-lg-2"></div>
-        <div class="col-lg-8 my-3">
-          <h1 class="text-center">To Do List</h1>
-          <p class="text-center lead"> </p>
-          <div class="responsive-table">
-            <table class="table my-3" >
-              <tr>
-                <td width=400>Descrição</td>            
-                <td> Order </td>
-              </tr> 
-              <tr *ngFor="let atividade of atividades$ | async">
-                <td> 
-                  {{ atividade.descricao.substr(0,47) }} 
-                </td>
-                <td>                    
-                  <button  type="button" class="btn btn-primary" class="btn btn-warning" (click)="refazer(atividade)">Refazer</button>                      
-                </td>
-              </tr>               
-            </table>
-          </div>
-        </div>    
-      <div class="col-lg-2"></div>
+<div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8 my-3">
+    <h1 class="text-center">Lista Concluida</h1>
+    <p class="text-center lead"> </p>
+    <div class="responsive-table">
+      <table class="table my-3">
+        <tr>
+          <td width=400>Descrição</td>
+          <td> Order </td>
+        </tr>
+        <tr *ngFor="let atividade of atividades$ | async">
+          <td>
+            {{ atividade.descricao.substr(0,47) }}
+          </td>
+          <td>
+            <button type="button"
+                    class="btn btn-primary"
+                    class="btn btn-warning"
+                    (click)="refazer(atividade)">Refazer</button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
+  <div class="col-lg-2"></div>
+</div>
