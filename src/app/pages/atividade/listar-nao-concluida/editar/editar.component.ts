@@ -68,8 +68,8 @@ export class EditarComponent implements OnInit {
       if (this.descricaoForm.valid === false || this.descricaoForm.value === null) {
         return;
       }
-
-      await lastValueFrom(this.atividadeService.registrar(this.descricaoForm.value, this.atividade.id));
+      
+      await lastValueFrom(this.atividadeService.atualizarDescricaoAtividade(this.descricaoForm.value, this.atividade.id));
       this.listaNaoConcuidaService.recarregarTelaEvent.emit();
       this.router.navigate(['../listarnaoconcluida']);
     } catch (error) {
