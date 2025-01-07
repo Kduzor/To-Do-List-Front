@@ -18,10 +18,11 @@ export class ListarConcluidaComponent implements OnInit {
 
   //lista atividade concluida
   private listar():void {
-    this.atividades$ = this.AtividadeService.listarAtividade(true);
+    this.atividades$ = this.AtividadeService.listarAtividade(true);    
   }
   //muda estado da atividade para não concluida  concluido = false
   public refazer(atividade: Atividade):void {     
-    this.atividades$ = this.AtividadeService.atualizarAtividade(atividade.id, atividade.concluido);    
+    this.atividades$ = this.AtividadeService.atualizarAtividade(atividade.id, atividade.concluido); 
+    location.reload()   
   }
 }

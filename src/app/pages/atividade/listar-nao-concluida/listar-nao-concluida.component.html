@@ -14,14 +14,19 @@
             <td> Order </td>
           </tr>
           <tr *ngFor="let atividade of atividades$ | async">
-            <td> <a class="nav-link"
-                 [routerLink]="[atividade.id, 'editar']">
+            <td> <a 
+                 [routerLink]="[atividade.id, 'editar']"> 
                 {{ atividade.descricao.substr(0,47) }}</a> </td>
+                
             <td>
+              
               <button type="button"
                       class="btn btn-primary"
                       class="btn btn-success"
                       (click)="concluirAtividade(atividade)">Concluir</button>
+              <button class="btn btn-info"
+              [routerLink]="[atividade.id, 'editar']"               
+              > Editar </button>
               <button type="button"
                       class="btn btn-danger"
                       (click)="excluir(atividade)"> Excluir</button>

@@ -37,31 +37,31 @@ export class EditarComponent implements OnInit {
     this.atividade = atividade;
     this.descricaoForm.setValue(atividade.descricao);
     this.isAtividadeCarregada = true;
-    // this.activatedRoute.params.subscribe(
-    //   (params: any) => {
-    //     const idAtividade = Number(params['id']);
-    //     this.carregaAtividadeEditar(idAtividade);
-    //   }
-    // );
+    this.activatedRoute.params.subscribe(
+       (params: any) => {
+         const idAtividade = Number(params['id']);
+         this.carregaAtividadeEditar(idAtividade);
+       }
+    );
   }
+  
+   private async carregaAtividadeEditar(pIdAtividade: number): Promise<void> {
+     try {
+       const response = await lastValueFrom(this.atividadeService.listarAtividade(false));
+       const atividade = response.find(pAtividade => pAtividade.id === pIdAtividade);
 
-  // private async carregaAtividadeEditar(pIdAtividade: number): Promise<void> {
-  //   try {
-  //     const response = await lastValueFrom(this.atividadeService.listarAtividade(false));
-  //     const atividade = response.find(pAtividade => pAtividade.id === pIdAtividade);
+       if (atividade === undefined) {
+         throw new Error('Atividade não encontrada');
+      }
 
-  //     if (atividade === undefined) {
-  //       throw new Error('Atividade não encontrada');
-  //     }
-
-  //     this.atividade = atividade;
-  //     this.descricaoForm.setValue(atividade.descricao);
-  //     this.isAtividadeCarregada = true;
-  //   } catch (error) {
-  //     console.error(error);
-  //     this.router.navigate(['../']);
-  //   }
-  // }
+       this.atividade = atividade;
+       this.descricaoForm.setValue(atividade.descricao);
+       this.isAtividadeCarregada = true;
+     } catch (error) {
+       console.error(error);
+       this.router.navigate(['../']);
+     }
+   }
 
   public async onSubmit(): Promise<void> {
     try {

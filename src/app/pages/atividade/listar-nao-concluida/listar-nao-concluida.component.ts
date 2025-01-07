@@ -3,6 +3,7 @@ import { AtividadeService } from 'src/app/shared/servicos/atividade.service';
 import { Observable, Subscription, tap } from 'rxjs';
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ListaNaoConcuidaService } from './listar-nao-concluido.service';
+import { EditarComponent } from './editar/editar.component';
 
 
 @Component({
@@ -35,12 +36,14 @@ export class ListarNaoConcluidaComponent implements OnInit,OnDestroy {
 
   //muda estado da atividade para concluida concluido = true
   public concluirAtividade(atividade: Atividade): void {
-    this.atividades$ = this.AtividadeService.atualizarAtividade(atividade.id, atividade.concluido);
+     this.atividades$ = this.AtividadeService.atualizarAtividade(atividade.id, atividade.concluido);
+     location.reload()
   }
 
   //deleta atividade
   public excluir(atividade: Atividade): void {
     this.atividades$ = this.AtividadeService.excluir(atividade.id);
+    location.reload()       
   }
 
   //lista atividade não concluida

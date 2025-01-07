@@ -7,11 +7,15 @@
       <table class="table my-3">
         <tr>
           <td width=400>Descrição</td>
-          <td> Order </td>
+          <td> Data de Abertura </td>
         </tr>
         <tr *ngFor="let atividade of atividades$ | async">
           <td>
-            {{ atividade.descricao.substr(0,47) }}
+            {{ atividade.descricao.substr(0,47) }}          
+          </td>
+          <td>
+        
+            {{atividade.createdAt}}            
           </td>
           <td>
             <button type="button"
