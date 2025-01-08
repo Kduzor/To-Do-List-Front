@@ -13,10 +13,10 @@
 # Recursos
 
 - [Inserir Atividade](#Inserir-Atividade-Modulo) : :heavy_check_mark:
-- [Concluir Atividade](#concluir-Atividade-Modulo) : :heavy_check_mark:
+- [Funcoes Atividade](#Funcoes-Atividade-Modulo) : :heavy_check_mark:
 - [Refazer Atividade](#Refazer-Atividade-Modulo) : :heavy_check_mark:
-- [Excluir Atividade](#Excluir-Atividade-Modulo) : :heavy_check_mark:
 - [Editar Atividade](#Editar-Atividade-Modulo) : :heavy_check_mark:
+
 
 
 
@@ -28,20 +28,17 @@
 
 ## Inserir Atividade Modulo
 
-- ![Alt text](src/app/shared/servicos/atividade.service.ts)
+- ![Alt text](src/app/shared/imagem/Inserir.png)
 
-## Concluir Atividade Modulo
+## Funcoes Atividade Modulo
 
-- ![Alt text](src/app/shared/servicos/atividade.service.ts)
+- ![Alt text](src/app/shared/imagem/Funcoes.png)
 
 ## Refazer Atividade Modulo
 
-- ![Alt text](src/app/shared/servicos/atividade.service.ts)
+- ![Alt text](src/app/shared/imagem/Refazer.png)
 
-## Excluir Atividade Modulo
-
-- ![Alt text](src/app/shared/servicos/atividade.service.ts)
 
 ## Editar Atividade Modulo
 
-- ![Alt text](src/app/shared/servicos/atividade.service.ts)
+- ![Alt text](src/app/shared/imagem/Editar.png)
