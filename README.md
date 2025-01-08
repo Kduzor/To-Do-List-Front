@@ -34,8 +34,9 @@
 
 - ![Alt text](https://github.com/Kduzor/To-Do-List-Front/tree/master/src/app/shared/imagem/Funcoes.png)
 
+## Refazer Atividade Modulo
 
-
+- ![Alt text](https://github.com/Kduzor/To-Do-List-Front/tree/master/src/app/shared/imagem/Refazer.png)
 
 ## Editar Atividade Modulo
 - ![Alt text](https://github.com/Kduzor/To-Do-List-Front/tree/master/src/app/shared/imagem/Editar.png)
